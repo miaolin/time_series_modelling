@@ -454,7 +454,7 @@ plot_technical_indicators(dataset_TI_df, 400)
 ```
 
 
-![png](../output_32_0.png)
+![png](output_32_0.png)
 
 
 ## 3.3. Fundamental analysis <a class="anchor" id="fundamental"></a>
@@ -512,7 +512,7 @@ plt.show()
 ```
 
 
-![png](../output_45_0.png)
+![png](output_45_0.png)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As you see in Figure 3 the more components from the Fourier transform we use the closer the approximation function is to the real stock price (the 100 components transform is almost identical to the original function - the red and the purple lines almost overlap). We use Fourier transforms for the purpose of extracting long- and short-term trends so we will use the transforms with 3, 6, and 9 components. You can infer that the transform with 3 components serves as the long term trend.
@@ -532,7 +532,7 @@ plt.show()
 ```
 
 
-![png](../output_47_0.png)
+![png](output_47_0.png)
 
 
 ## 3.5. ARIMA as a feature <a class="anchor" id="arimafeature"></a>
@@ -590,7 +590,7 @@ plt.show()
 ```
 
 
-![png](../output_51_0.png)
+![png](output_51_0.png)
 
 
 
@@ -643,7 +643,7 @@ plt.show()
 ```
 
 
-![png](../output_54_0.png)
+![png](output_54_0.png)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;As we can see from Figure 5 ARIMA gives a very good approximation of the real stock price. We will use the predicted price through ARIMA as an input feature into the LSTM because, as we mentioned before, we want to capture as many features and patterns about Goldman Sachs as possible. We go test MSE (mean squared error) of 10.151, which by itself is not a bad result (considering we do have a lot of test data), but still we will only use it as a feature in the LSTM.
@@ -741,7 +741,7 @@ plt.show()
 ```
 
 
-![png](../output_73_0.png)
+![png](output_73_0.png)
 
 
 
@@ -754,7 +754,7 @@ plt.show()
 ```
 
 
-![png](../output_74_0.png)
+![png](output_74_0.png)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not surprisingly (for those with experience in stock trading) that MA7, MACD, and BB are among the important features. 
@@ -813,7 +813,7 @@ plt.show()
 ```
 
 
-![png](../output_82_0.png)
+![png](output_82_0.png)
 
 
 **Note**: In future versions of this notebook I will experiment using **U-Net** (<a href="https://arxiv.org/abs/1505.04597">link</a>), and try to utilize the convolutional layer and extract (and create) even more features about the stock's underlying movement patterns. For now, we will just use a simple autoencoder made only from ```Dense``` layers.
@@ -1241,7 +1241,7 @@ plt.show()
 ```
 
 
-![png](../output_129_0.png)
+![png](output_129_0.png)
 
 
 ### 4.4.4. How to prevent overfitting and the bias-variance trade-off <a class="anchor" id="preventoverfitting"></a>
@@ -1455,7 +1455,7 @@ plot_prediction('Predicted and Real price - after first epoch.')
 ```
 
 
-![png](../output_168_0.png)
+![png](output_168_0.png)
 
 
 2. Plot after 50 epochs.
@@ -1466,7 +1466,7 @@ plot_prediction('Predicted and Real price - after first 50 epochs.')
 ```
 
 
-![png](../output_170_0.png)
+![png](output_170_0.png)
 
 
 
@@ -1475,7 +1475,7 @@ plot_prediction('Predicted and Real price - after first 200 epochs.')
 ```
 
 
-![png](../output_171_0.png)
+![png](output_171_0.png)
 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The RL run for ten episodes (we define an eposide to be one full GAN training on the 200 epochs.)
@@ -1486,7 +1486,7 @@ plot_prediction('Final result.')
 ```
 
 
-![png](../output_173_0.png)
+![png](output_173_0.png)
 
 
 #### As a next step, I will try to take everything separately and provide some analysis on what worked and why. Why did we receive these results and is it just by coinscidence? So stay tuned.
