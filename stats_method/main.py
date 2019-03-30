@@ -17,10 +17,10 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.metrics import mean_squared_error, accuracy_score
 import xgboost as xgb
 
-from time_series_modelling.config import data_path
-from time_series_modelling.common_misc import parser
-from time_series_modelling.plot_utils import plot_raw_price, plot_technical_indicators
-from time_series_modelling.fourier_transforms import fourier_transformation, plot_ft
+from stats_method.config import data_path
+from stats_method.common_misc import parser
+from stats_method.plot_utils import plot_raw_price, plot_technical_indicators
+from stats_method.fourier_transforms import fourier_transformation, plot_ft
 warnings.filterwarnings("ignore")
 
 
