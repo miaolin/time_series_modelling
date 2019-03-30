@@ -18,12 +18,10 @@ from sklearn.metrics import mean_squared_error, accuracy_score
 import xgboost as xgb
 
 from time_series_modelling.config import data_path
+from time_series_modelling.common_misc import parser
 from time_series_modelling.plot_utils import plot_raw_price, plot_technical_indicators
 from time_series_modelling.fourier_transforms import fourier_transformation, plot_ft
 warnings.filterwarnings("ignore")
-
-
-
 
 
 def get_technical_indicators(dataset, target_col):
@@ -46,9 +44,6 @@ def get_technical_indicators(dataset, target_col):
     # create momentum
     dataset['log_momentum'] = np.log(dataset[target_col] - 1)
     return dataset
-
-
-
 
 
 if __name__ == "__main__":
