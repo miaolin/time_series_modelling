@@ -5,8 +5,8 @@ from statsmodels.tsa.arima_model import ARIMA
 from sklearn.metrics import mean_squared_error
 import matplotlib.pyplot as plt
 
-from time_series_modelling.config import data_path
-from time_series_modelling.common_misc import parser
+from stats_method.config import data_path
+from stats_method.common_misc import parser
 
 
 def arima_fit(data_series, print_info=True):

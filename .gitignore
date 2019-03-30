@@ -6,9 +6,6 @@ __pycache__/
 *$py.class
 */__pycache__/*.pyc
 
-xgb_ws_standalone/
-xgb_ws_offline
-
 *.csv
 .DS_Store
 */.DS_Store
