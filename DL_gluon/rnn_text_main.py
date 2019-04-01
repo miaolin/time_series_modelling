@@ -15,7 +15,7 @@ args_nhid = 100
 args_nlayers = 2
 args_lr = 1.0
 args_clip = 0.2
-args_epochs = 1
+args_epochs = 10
 args_batch_size = 32
 args_bptt = 5
 args_dropout = 0.2
@@ -68,11 +68,15 @@ def eval(data_source, model):
 
 
 def train(model, train_data, val_data, test_data):
+
+    args_lr = 1.0
+    trainer = gluon.Trainer(model.collect_params(), 'sgd', {'learning_rate': args_lr, 'momentum': 0, 'wd': 0})
+
     best_val = float("Inf")
     for epoch in range(args_epochs):
         total_L = 0.0
         start_time = time.time()
-        hidden = rnn_model.begin_state(func=mx.nd.zeros, batch_size=args_batch_size, ctx=context)
+        hidden = model.begin_state(func=mx.nd.zeros, batch_size=args_batch_size, ctx=context)
 
         for ibatch, i in enumerate(range(0, train_data.shape[0] - 1, args_bptt)):
             data, target = get_batch(train_data, i)
@@ -97,13 +101,13 @@ def train(model, train_data, val_data, test_data):
 
                 total_L = 0.0
 
-        val_L = eval(val_data)
+        val_L = eval(val_data, model)
         print('[Epoch %d] time cost %.2fs, validation loss %.2f, validation perplexity '
               '%.2f' % (epoch + 1, time.time() - start_time, val_L, math.exp(val_L)))
 
         if val_L < best_val:
             best_val = val_L
-            test_L = eval(test_data)
+            test_L = eval(test_data, rnn_model)
             model.save_parameters(args_save)
             print('test loss %.2f, test perplexity %.2f' % (test_L, math.exp(test_L)))
         else:
@@ -127,12 +131,10 @@ if __name__ == "__main__":
     rnn_model = RNNModel(args_model, vocab_size=ntokens, num_embed=args_emsize, num_hidden=args_nhid,
                          num_layers=args_nlayers, dropout=args_dropout, tie_weights=args_tied)
     rnn_model.collect_params().initialize(mx.init.Xavier(), ctx=context)
-    trainer = gluon.Trainer(rnn_model.collect_params(), 'sgd',
-                            {'learning_rate': args_lr, 'momentum': 0, 'wd': 0})
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
 
     train(model=rnn_model, train_data=train_data_text, val_data=val_data_text, test_data=test_data_text)
-    test_L = eval(test_data_text)
+    test_L = eval(test_data_text, rnn_model)
     print("Best test loss %.2f, test perplexity %.2f" % (test_L, math.exp(test_L)))
 
 
