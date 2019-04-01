@@ -19,7 +19,7 @@ class Dictionary(object):
         return len(self.idx2word)
 
 
-class Corpus(object):
+class Corpus:
     def __int__(self, path):
         self.dictionary = Dictionary()
         self.train = self.tokenize(path + 'train.txt')

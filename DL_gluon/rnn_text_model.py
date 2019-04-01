@@ -1,5 +1,4 @@
 # coding=utf-8
-import math
 import mxnet as mx
 from mxnet import gluon, autograd
 from mxnet.gluon import nn, rnn
