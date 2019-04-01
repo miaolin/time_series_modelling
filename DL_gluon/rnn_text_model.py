@@ -7,7 +7,7 @@ from mxnet.gluon import nn, rnn
 class RNNModel(gluon.Block):
     """A model with an encode, recurrent layer, and a decoder."""
 
-    def __int__(self, mode, vocab_size, num_embed, num_hidden, num_layers,
+    def __init__(self, mode, vocab_size, num_embed, num_hidden, num_layers,
                 dropout=0.5, tie_weights=False, **kwargs):
         super(RNNModel, self).__init__(**kwargs)
         with self.name_scope():

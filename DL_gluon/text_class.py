@@ -19,8 +19,8 @@ class Dictionary(object):
         return len(self.idx2word)
 
 
-class Corpus:
-    def __int__(self, path):
+class Corpus(object):
+    def __init__(self, path):
         self.dictionary = Dictionary()
         self.train = self.tokenize(path + 'train.txt')
         self.valid = self.tokenize(path + 'valid.txt')
@@ -29,7 +29,6 @@ class Corpus:
     def tokenize(self, path):
         """Tokenizes a text file"""
         assert os.path.exists(path)
-
         with open(path, 'r') as f:
             tokens = 0
             for line in f:
