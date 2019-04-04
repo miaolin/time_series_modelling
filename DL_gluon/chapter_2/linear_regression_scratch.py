@@ -16,7 +16,7 @@ def real_fn(X):
 
 
 def synthetic_data(number_inputs, number_outputs, number_samples):
-    X = nd.random_normal(shape=(num_samples, number_inputs), ctx=data_ctx)
+    X = nd.random_normal(shape=(number_samples, number_inputs), ctx=data_ctx)
     noise = .1 * nd.random_normal(shape=(number_samples, ), ctx=data_ctx)
     y = real_fn(X) + noise
     return X, y
