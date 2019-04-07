@@ -81,15 +81,3 @@ if __name__ == "__main__":
             cumulative_loss += nd.sum(loss).asscalar()
         print("Epoch %s, loss: %s" % (e, cumulative_loss))
         loss_sequence.append(cumulative_loss)
-
-
-
-
-
-
-
-
-
-
-
-
