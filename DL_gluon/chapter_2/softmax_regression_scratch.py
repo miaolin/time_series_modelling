@@ -4,10 +4,14 @@ import numpy as np
 import mxnet as mx
 from mxnet import nd, autograd, gluon
 import matplotlib.pyplot as plt
+
+from DL_gluon.common_utils import SGD
+
 mx.random.seed(1)
 
 data_ctx = mx.cpu()
 model_ctx = mx.cpu()
+
 
 def transform(data, label):
     return data.astype(np.float32) / 255, label.astype(np.float32)
@@ -32,12 +36,6 @@ def net(X, Weight, bias):
 
 def cross_entropy(yhat, y):
     return - nd.sum(y * nd.log(yhat + 1e-6))
-
-
-def SGD(model_params, lr):
-    for param in model_params:
-        param[:] = param - lr * param.grad
-    return params
 
 
 def evaluate_accuracy(data_iterator, net, Weight, bias):

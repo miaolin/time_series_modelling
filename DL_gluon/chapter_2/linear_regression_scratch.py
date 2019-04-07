@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 
 import mxnet as mx
 from mxnet import nd, autograd, gluon
+
+from DL_gluon.common_utils import SGD
+
 mx.random.seed(1)
 
 data_ctx = mx.cpu()
@@ -34,12 +37,6 @@ def net(input_data, weight, b):
 
 def square_loss(y_est, y):
     return nd.mean((y_est - y) ** 2)
-
-
-def SGD(model_params, learning_rate):
-    for param in model_params:
-        param[:] = param - learning_rate * param.grad
-    return model_params
 
 
 def plot_loss(losses, X, weight, b, sample_size=100):
