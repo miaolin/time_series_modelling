@@ -29,3 +29,14 @@ def cross_entropy(yhat, y):
 
 def softmax_cross_entropy(yhat_linear, y):
     return - nd.nansum( y * nd.log_softmax(yhat_linear), axis=0, exclude=True)
+
+
+def dropout(X, drop_prob):
+    keep_prob = 1.0 - drop_prob
+    mask = nd.random_uniform(0, 1.0, X.shape, ctx=X.context) < keep_prob
+
+    if keep_prob > 0.0:
+        scale = (1 / keep_prob)
+    else:
+        scale = 0.0
+    return mask * X * scale
