@@ -4,7 +4,7 @@ import mxnet as mx
 from mxnet import nd, autograd, gluon
 
 from DL_gluon.common_utils import transform, relu, softmax_cross_entropy, SGD, dropout
-from DL_gluon.chapter_3.common_utils import net_dropout, evaluate_accuracy
+from DL_gluon.chapter_3.common_utils import net_dropout, evaluate_accuracy_scratch
 
 
 ctx = mx.gpu() if mx.test_utils.list_gpus() else mx.cpu()
@@ -63,7 +63,7 @@ if __name__ == "__main__":
             else:
                 moving_loss = 0.99 * moving_loss + 0.01 * nd.mean(loss).asscalar()
 
-        test_accuracy = evaluate_accuracy(test_data, net_dropout, params, model_ctx)
-        train_accuracy = evaluate_accuracy(train_data, net_dropout, params, model_ctx)
+        test_accuracy = evaluate_accuracy_scratch(test_data, net_dropout, params, model_ctx)
+        train_accuracy = evaluate_accuracy_scratch(train_data, net_dropout, params, model_ctx)
         print("Epoch %s. Loss: %s, Train_acc %s, Test_acc %s" % (e, moving_loss, train_accuracy,
                                                                  test_accuracy))

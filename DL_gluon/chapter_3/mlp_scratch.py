@@ -3,7 +3,7 @@ from __future__ import print_function
 import mxnet as mx
 from mxnet import nd, autograd, gluon
 
-from DL_gluon.chapter_3.common_utils import net, evaluate_accuracy
+from DL_gluon.chapter_3.common_utils import net, evaluate_accuracy_scratch
 from DL_gluon.common_utils import transform, softmax_cross_entropy, SGD
 
 
@@ -57,7 +57,7 @@ if __name__ == "__main__":
             SGD(params, learning_rate)
             cumulative_loss += nd.sum(loss).asscalar()
 
-        test_accuracy = evaluate_accuracy(test_data, net, params, model_ctx)
-        train_accuracy = evaluate_accuracy(train_data, net, params, model_ctx)
+        test_accuracy = evaluate_accuracy_scratch(test_data, net, params, model_ctx)
+        train_accuracy = evaluate_accuracy_scratch(train_data, net, params, model_ctx)
         print("Epoch %s. Loss: %s, Train_acc %s, Test_acc %s" %
               (e, cumulative_loss / num_example, train_accuracy, test_accuracy))

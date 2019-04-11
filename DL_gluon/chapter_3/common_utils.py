@@ -1,5 +1,6 @@
 # coding=utf-8
 from mxnet import nd
+import mxnet as mx
 
 from DL_gluon.common_utils import relu, dropout
 
@@ -30,7 +31,7 @@ def net_dropout(X, model_params, drop_prob=0.0):
     return yhat_linear
 
 
-def evaluate_accuracy(data_iterator, net, model_params, model_ctx):
+def evaluate_accuracy_scratch(data_iterator, net, model_params, model_ctx):
     numerator = 0.
     denominator = 0.
     for i, (data, label) in enumerate(data_iterator):
@@ -41,3 +42,14 @@ def evaluate_accuracy(data_iterator, net, model_params, model_ctx):
         numerator += nd.sum(predictions == label)
         denominator += data.shape[0]
     return (numerator / denominator).asscalar()
+
+
+def evaluate_accuracy(data_iterator, net, ctx):
+    acc = mx.metric.Accuracy()
+    for i, (data, label) in enumerate(data_iterator):
+        data = data.as_in_context(ctx).reshape((-1, 784))
+        label = label.as_in_context(ctx)
+        output = net(data)
+        predictions = nd.argmax(output, axis=1)
+        acc.update(preds=predictions, labels=label)
+    return acc.get()[1]
