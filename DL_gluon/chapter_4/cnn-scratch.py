@@ -2,16 +2,14 @@
 from __future__ import print_function
 import mxnet as mx
 import numpy as np
-from mxnet import nd, autograd, gluon
-from DL_gluon.common_utils import relu, softmax, softmax_cross_entropy, SGD
+from mxnet import nd, autograd
+
+from DL_gluon.chapter_4.common_utils import transform
+from DL_gluon.common_utils import relu, softmax_cross_entropy, SGD
 
 
 ctx = mx.cpu()
 mx.random.seed(1)
-
-
-def transform(data, label):
-    return nd.transpose(data.astype(np.float32), (2, 0, 1))/255, label.astype(np.float32)
 
 
 def evaluate_accuracy(data_iterator, net, params, num_filter_layer1, num_filter_layer2):

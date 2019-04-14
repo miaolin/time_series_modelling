@@ -1,6 +1,7 @@
 # coding=utf-8
+import mxnet as mx
 import numpy as np
-from mxnet import nd
+from mxnet import nd, ndarray
 
 
 def SGD(model_params, learning_rate):
@@ -40,3 +41,14 @@ def dropout(X, drop_prob):
     else:
         scale = 0.0
     return mask * X * scale
+
+
+def evaluate_accuracy(data_iterator, net, ctx):
+    acc = mx.metric.Accuracy()
+    for i, (data, label) in enumerate(data_iterator):
+        data = data.as_in_context(ctx).reshape((-1, 784))
+        label = label.as_in_context(ctx)
+        output = net(data)
+        predictions = nd.argmax(output, axis=1)
+        acc.update(preds=predictions, labels=label)
+    return acc.get()[1]
