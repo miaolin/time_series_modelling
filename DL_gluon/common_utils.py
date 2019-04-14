@@ -28,7 +28,7 @@ def cross_entropy(yhat, y):
 
 
 def softmax_cross_entropy(yhat_linear, y):
-    return - nd.nansum( y * nd.log_softmax(yhat_linear), axis=0, exclude=True)
+    return - nd.nansum(y * nd.log_softmax(yhat_linear), axis=0, exclude=True)
 
 
 def dropout(X, drop_prob):
