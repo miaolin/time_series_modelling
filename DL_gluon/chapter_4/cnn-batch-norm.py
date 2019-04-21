@@ -180,6 +180,7 @@ if __name__ == "__main__":
     output = net(data, params, is_training=True, debug=True)
 
     # training
+    # this training needs gpu, using cpu would be very slow
     epochs = 1
     moving_loss = 0.0
     learning_rate = 0.01
