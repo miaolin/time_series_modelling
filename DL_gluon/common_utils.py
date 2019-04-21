@@ -43,10 +43,13 @@ def dropout(X, drop_prob):
     return mask * X * scale
 
 
-def evaluate_accuracy(data_iterator, net, ctx):
+def evaluate_accuracy(data_iterator, net, ctx, reshape=True):
     acc = mx.metric.Accuracy()
     for i, (data, label) in enumerate(data_iterator):
-        data = data.as_in_context(ctx).reshape((-1, 784))
+        if reshape:
+            data = data.as_in_context(ctx).reshape((-1, 784))
+        else:
+            data = data.as_in_context(ctx)
         label = label.as_in_context(ctx)
         output = net(data)
         predictions = nd.argmax(output, axis=1)

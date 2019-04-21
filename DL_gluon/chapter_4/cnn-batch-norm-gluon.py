@@ -65,6 +65,6 @@ if __name__ == "__main__":
                 moving_loss = curr_loss
             else:
                 moving_loss = (1 - smoothing_constant) * moving_loss + smoothing_constant * curr_loss
-        test_accuracy = evaluate_accuracy(test_data, net)
-        train_accuracy = evaluate_accuracy(train_data, net)
+        train_accuracy = evaluate_accuracy(train_data, net, ctx, reshape=False)
+        test_accuracy = evaluate_accuracy(test_data, net, ctx, reshape=False)
         print("Epoch %s. Loss: %s, Train_acc %s, Test_acc %s" % (e, moving_loss, train_accuracy, test_accuracy))
